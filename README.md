@@ -2,15 +2,6 @@
 
 <div align="center">
 
-![项目状态](https://img.shields.io/badge/状态 - 开发中-blue.svg)
-![发布版本](https://img.shields.io/badge/版本 -v0.1.0-orange.svg)
-![许可证](https://img.shields.io/badge/许可证-MIT-green.svg)
-![平台](https://img.shields.io/badge/平台-ESP32--S3--EYE/树莓派/Jetson/RK3588-ff69b4.svg)
-![构建状态](https://img.shields.io/badge/构建-通过-brightgreen.svg)
-![代码质量](https://img.shields.io/badge/代码质量 -A-blue.svg)
-![最后提交](https://img.shields.io/github/last-commit/lsf06/tangtang/main.svg)
-![贡献者](https://img.shields.io/github/contributors/lsf06/tangtang.svg)
-
 **🏥 一款面向居家老年群体的无创光学血糖监测与远程监护解决方案**
 
 [简介](#-项目简介) • [功能特性](#-功能特性) • [系统架构](#-系统架构) • [硬件选型](#-硬件选型) • [快速开始](#-快速开始) • [API 文档](#-api 文档) • [FAQ](#-常见问题) • [贡献指南](#-贡献指南) • [版本历史](#-版本历史)
@@ -509,151 +500,7 @@ logging:
 
 ## 📚 API 文档
 
-### 基础信息
-
-- **Base URL**: `http://localhost:8080/api/v1`
-- **数据格式**: JSON
-- **认证方式**: Bearer Token
-
-### 认证接口
-
-#### 获取访问令牌
-
-```http
-POST /auth/login
-Content-Type: application/json
-
-{
-  "username": "patient_001",
-  "password": "your_password"
-}
-```
-
-**响应**:
-```json
-{
-  "code": 200,
-  "message": "success",
-  "data": {
-    "access_token": "eyJhbGciOiJIUzI1NiIs...",
-    "token_type": "Bearer",
-    "expires_in": 3600
-  }
-}
-```
-
-### 血糖数据接口
-
-#### 获取血糖数据
-
-```http
-GET /glucose/records?start_date=2024-01-01&end_date=2024-01-31&page=1&size=20
-Authorization: Bearer {access_token}
-```
-
-**响应**:
-```json
-{
-  "code": 200,
-  "data": {
-    "total": 156,
-    "records": [
-      {
-        "id": "rec_001",
-        "timestamp": "2024-01-15T08:30:00Z",
-        "value": 5.6,
-        "unit": "mmol/L",
-        "status": "normal",
-        "context": "空腹"
-      }
-    ]
-  }
-}
-```
-
-#### 上传血糖数据
-
-```http
-POST /glucose/records
-Authorization: Bearer {access_token}
-Content-Type: application/json
-
-{
-  "value": 6.2,
-  "unit": "mmol/L",
-  "context": "餐后 2 小时",
-  "device_id": "device_001"
-}
-```
-
-### 分析接口
-
-#### 获取趋势分析
-
-```http
-GET /analysis/trend?period=week&start_date=2024-01-01
-Authorization: Bearer {access_token}
-```
-
-**响应**:
-```json
-{
-  "code": 200,
-  "data": {
-    "period": "week",
-    "summary": {
-      "avg": 5.8,
-      "min": 4.2,
-      "max": 8.1,
-      "normal_rate": 0.78
-    },
-    "trend": [
-      {"date": "2024-01-08", "avg": 5.5},
-      {"date": "2024-01-09", "avg": 6.0}
-    ],
-    "recommendations": [
-      "建议增加有氧运动",
-      "注意晚餐碳水摄入"
-    ]
-  }
-}
-```
-
-### 预警接口
-
-#### 订阅预警通知
-
-```http
-POST /alert/subscribe
-Authorization: Bearer {access_token}
-Content-Type: application/json
-
-{
-  "user_id": "patient_001",
-  "alert_types": ["low_glucose", "high_glucose", "critical"],
-  "notification_channels": ["sms", "push", "call"]
-}
-```
-
-### WebSocket 实时数据
-
-```javascript
-// 连接实时数据流
-const ws = new WebSocket('wss://api.example.com/ws/glucose');
-
-ws.onopen = () => {
-  ws.send(JSON.stringify({
-    type: 'subscribe',
-    user_id: 'patient_001'
-  }));
-};
-
-ws.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-  console.log('实时血糖数据:', data);
-  // { type: 'glucose_update', value: 5.8, timestamp: '...' }
-};
-```
+详见 [API 文档](API.md)。
 
 ---
 
@@ -775,42 +622,9 @@ pytest tests/performance/ -v --stress
 python scripts/benchmark.py
 ```
 
-### 测试覆盖率
-
-| 模块 | 覆盖率 |
-|------|--------|
-| 数据采集 | 92% |
-| AI 分析引擎 | 88% |
-| 语音播报 | 85% |
-| 预警系统 | 95% |
-| 通信模块 | 90% |
-| **总体** | **89%** |
-
 ---
 
-## 📊 性能指标
-
-### 系统性能
-
-| 指标 | 数值 |
-|------|------|
-| 检测耗时 | < 10 秒 |
-| AI 分析耗时 | < 500ms |
-| 语音播报延迟 | < 200ms |
-| 预警推送延迟 | < 1 秒 |
-| 通话建立时间 | < 3 秒 |
-| 系统可用性 | > 99.5% |
-
-### 资源占用
-
-| 组件 | CPU | 内存 | 存储 |
-|------|-----|------|------|
-| ESP32-S3 | 45% | 60% | 10MB |
-| 边缘服务 | 25% | 512MB | 1GB/月 |
-
----
-
-## 🤝 贡献指南
+##  贡献指南
 
 我们欢迎任何形式的贡献！
 
