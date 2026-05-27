@@ -67,10 +67,20 @@ const currentTitle = computed(() => route.meta.title || '健康管家')
   box-sizing: border-box;
 }
 
-#app {
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+}
+
+#app {
+  height: 100%;
+  width: 100%;
 }
 
 .layout-container {

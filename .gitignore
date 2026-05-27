@@ -72,3 +72,11 @@ htmlcov/
 # Documentation build
 docs/_build/
 site/
+
+# Node.js / Vue3
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dist/
+.DS_Store
