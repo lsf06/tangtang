@@ -17,7 +17,86 @@
 
 ---
 
-## 三、快速入门（面向小白，5 分钟可上手）
+## 三、Web 门户系统
+
+本项目包含四个 Web 前端应用：
+
+### 项目结构
+
+```
+web-portal/
+├── patient/      # 患者端 - 纯 HTML 页面
+├── family/       # 家属端 - Vue3 + Vue Router
+├── dashboard/    # 数据大屏 - Vue3
+└── admin/        # 管理后台 - Vue3 + Element Plus + Pinia
+```
+
+### 各端功能
+
+#### 患者端 (patient)
+- 健康数据录入界面
+- 简单直观的纯 HTML 页面
+
+#### 家属端 (family)
+- 实时健康数据查看
+- 历史数据查询
+- 告警通知
+- 视频通话
+- 健康报告
+
+#### 数据大屏 (dashboard)
+- 实时数据展示
+- 24 小时趋势图
+- 统计信息
+- 告警列表
+- 健康状态热力图
+
+#### 管理后台 (admin)
+- 仪表盘
+- 用户管理
+- 设备管理
+- 系统配置
+
+### 启动方式
+
+#### 患者端
+直接用浏览器打开 `patient/index.html`
+
+#### 家属端
+```bash
+cd web-portal/family
+npm install
+npm run dev
+```
+访问 http://localhost:3001
+
+#### 数据大屏
+```bash
+cd web-portal/dashboard
+npm install
+npm run dev
+```
+访问 http://localhost:3002
+
+#### 管理后台
+```bash
+cd web-portal/admin
+npm install
+npm run dev
+```
+访问 http://localhost:3003
+
+### 技术栈
+
+- **前端框架**: Vue 3
+- **路由**: Vue Router 4
+- **状态管理**: Pinia
+- **UI 组件**: Element Plus
+- **构建工具**: Vite
+
+---
+
+## 四、快速入门（面向小白，5 分钟可上手）
 
 ### 前置条件
 
@@ -113,7 +192,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 四、产品功能与特征
+## 五、产品功能与特征
 
 ### 竞品对比
 
@@ -141,7 +220,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 五、产品工作原理（How it works）
+## 六、产品工作原理（How it works）
 
 ### 技术路线
 
@@ -218,7 +297,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 六、AI 协同开发说明
+## 七、AI 协同开发说明
 
 ### 开发全流程 AI 辅助
 
@@ -233,7 +312,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 七、技术来源
+## 八、技术来源
 
 ### 行业现有技术方案及问题
 
@@ -261,7 +340,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 八、技术壁垒与核心保护
+## 九、技术壁垒与核心保护
 
 ### 核心壁垒
 
@@ -283,7 +362,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 九、路线图
+## 十、路线图
 
 ### 版本规划
 
@@ -304,7 +383,7 @@ curl -X POST http://localhost:8080/api/v1/detect
 
 ---
 
-## 十、项目配置与 API 手册
+## 十一、项目配置与 API 手册
 
 ### 配置文件说明
 
@@ -369,7 +448,7 @@ print(response.json())
 
 ---
 
-## 十一、许可证与合规
+## 十二、许可证与合规
 
 ### 开源协议
 
@@ -386,7 +465,7 @@ print(response.json())
 
 ---
 
-## 十二、仓库首页展示内容
+## 十三、仓库首页展示内容
 
 ### 硬件概念设计图
 
@@ -460,7 +539,7 @@ print(response.json())
 ### 项目信息
 
 **项目类型**：物联网 + 边缘 AI + 健康监护  
-**技术栈**：ESP32-S3-EYE、树莓派 5、Python、AI 分析  
+**技术栈**：ESP32-S3-EYE、树莓派 5、Python、AI 分析、Vue3  
 **开源协议**：MIT  
 **项目作者**：lsf06
 
