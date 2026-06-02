@@ -19,7 +19,7 @@
 
 ## 三、Web 门户系统
 
-本项目包含四个 Web 前端应用：
+本项目包含四个 Web 前端应用，采用现代化的前端技术栈构建：
 
 ### 项目结构
 
@@ -31,36 +31,59 @@ web-portal/
 └── admin/        # 管理后台 - Vue3 + Element Plus + Pinia
 ```
 
-### 各端功能
+### 各端功能详解
 
 #### 患者端 (patient)
+**定位**：为老年患者提供简单直观的健康数据录入界面
+
+**功能列表**：
 - 健康数据录入界面
-- 简单直观的纯 HTML 页面
+- 一键紧急呼叫
+- 语音提示引导
+- 纯 HTML 静态页面，无需复杂操作
 
 #### 家属端 (family)
-- 实时健康数据查看
-- 历史数据查询
-- 告警通知
-- 视频通话
-- 健康报告
+**定位**：家属远程监护平台，实时掌握患者健康状况
+
+**功能列表**：
+- **实时数据查看**：心率、血氧、体温等实时生理数据
+- **历史数据查询**：按时间范围查询历史健康记录
+- **告警通知**：异常数据实时推送预警
+- **视频通话**：与患者进行双向视频通话
+- **健康报告**：生成周期性健康分析报告
+- **患者管理**：管理多个被监护患者信息
+
+**技术栈**：Vue 3 + Vue Router 4 + Axios
 
 #### 数据大屏 (dashboard)
-- 实时数据展示
-- 24 小时趋势图
-- 统计信息
-- 告警列表
-- 健康状态热力图
+**定位**：可视化数据展示中心，适合监护中心大屏展示
+
+**功能列表**：
+- **实时数据展示**：所有在线设备的实时数据流
+- **24 小时趋势图**：关键指标的 24 小时变化曲线
+- **统计信息**：在线设备数、告警数、健康率等统计
+- **告警列表**：实时滚动的告警信息列表
+- **健康状态热力图**：按时间段展示健康状态分布
+
+**技术栈**：Vue 3 + ECharts（可视化图表库）
 
 #### 管理后台 (admin)
-- 仪表盘
-- 用户管理
-- 设备管理
-- 系统配置
+**定位**：系统管理员配置和管理平台
+
+**功能列表**：
+- **仪表盘**：系统整体运行状态概览
+- **用户管理**：患者账户、家属账户的增删改查
+- **设备管理**：绑定设备与患者、设备状态监控
+- **系统配置**：告警阈值配置、系统参数设置
+- **数据管理**：数据备份、导出、清理
+- **日志查看**：系统运行日志、操作审计日志
+
+**技术栈**：Vue 3 + Vue Router 4 + Pinia + Element Plus
 
 ### 启动方式
 
 #### 患者端
-直接用浏览器打开 `patient/index.html`
+直接用浏览器打开 `web-portal/patient/index.html`
 
 #### 家属端
 ```bash
@@ -68,7 +91,7 @@ cd web-portal/family
 npm install
 npm run dev
 ```
-访问 http://localhost:3001
+启动后在浏览器访问 `http://localhost:5173`（Vite 默认端口）
 
 #### 数据大屏
 ```bash
@@ -76,7 +99,7 @@ cd web-portal/dashboard
 npm install
 npm run dev
 ```
-访问 http://localhost:3002
+启动后在浏览器访问 `http://localhost:5173`（Vite 默认端口）
 
 #### 管理后台
 ```bash
@@ -84,15 +107,56 @@ cd web-portal/admin
 npm install
 npm run dev
 ```
-访问 http://localhost:3003
+启动后在浏览器访问 `http://localhost:5173`（Vite 默认端口）
 
-### 技术栈
+### 构建部署
 
-- **前端框架**: Vue 3
-- **路由**: Vue Router 4
-- **状态管理**: Pinia
-- **UI 组件**: Element Plus
-- **构建工具**: Vite
+#### 构建命令
+```bash
+# 家属端
+cd web-portal/family
+npm run build
+
+# 数据大屏
+cd web-portal/dashboard
+npm run build
+
+# 管理后台
+cd web-portal/admin
+npm run build
+```
+
+#### 预览构建结果
+```bash
+# 家属端
+cd web-portal/family
+npm run preview
+
+# 数据大屏
+cd web-portal/dashboard
+npm run preview
+
+# 管理后台
+cd web-portal/admin
+npm run preview
+```
+
+### 技术栈总览
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| **前端框架** | Vue 3 | UI 框架 |
+| **路由** | Vue Router 4 | 页面路由管理 |
+| **状态管理** | Pinia | 全局状态管理 |
+| **UI 组件** | Element Plus | 管理后台 UI 组件库 |
+| **HTTP 客户端** | Axios | API 请求 |
+| **构建工具** | Vite 5 | 开发和构建工具 |
+| **时间处理** | Day.js | 日期时间处理 |
+
+### 开发环境要求
+
+- Node.js >= 16.0.0
+- npm >= 8.0.0
 
 ---
 
