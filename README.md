@@ -91,7 +91,7 @@ cd web-portal/family
 npm install
 npm run dev
 ```
-访问 http://localhost:3001
+启动后在浏览器访问 `http://localhost:5173`（Vite 默认端口）
 
 #### 数据大屏
 ```bash
@@ -99,7 +99,7 @@ cd web-portal/dashboard
 npm install
 npm run dev
 ```
-访问 http://localhost:3002
+启动后在浏览器访问 `http://localhost:5173`（Vite 默认端口）
 
 #### 管理后台
 ```bash
@@ -107,7 +107,7 @@ cd web-portal/admin
 npm install
 npm run dev
 ```
-访问 http://localhost:3003
+启动后在浏览器访问 `http://localhost:5173`（Vite 默认端口）
 
 ### 构建部署
 
