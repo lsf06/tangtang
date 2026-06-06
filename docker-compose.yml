@@ -1,0 +1,108 @@
+version: '3.8'
+
+# 基于边缘 AI 的多模态居家健康监护系统 - Docker 编排文件
+# 启动命令：docker-compose up -d
+
+services:
+  # 患者端 - 静态 HTML 页面
+  patient:
+    image: nginx:alpine
+    container_name: tangtang-patient
+    ports:
+      - "8081:80"
+    volumes:
+      - ./web-portal/patient:/usr/share/nginx/html:ro
+      - ./nginx-patient.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+    networks:
+      - tangtang-network
+
+  # 家属端 - Vue3 应用
+  family:
+    build:
+      context: ./web-portal/family
+      dockerfile: ../../Dockerfile.vue
+    container_name: tangtang-family
+    ports:
+      - "8082:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=http://localhost:8080/api
+    restart: unless-stopped
+    networks:
+      - tangtang-network
+    depends_on:
+      - backend
+
+  # 数据大屏 - Vue3 应用
+  dashboard:
+    build:
+      context: ./web-portal/dashboard
+      dockerfile: ../../Dockerfile.vue
+    container_name: tangtang-dashboard
+    ports:
+      - "8083:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=http://localhost:8080/api
+    restart: unless-stopped
+    networks:
+      - tangtang-network
+    depends_on:
+      - backend
+
+  # 管理后台 - Vue3 + Element Plus
+  admin:
+    build:
+      context: ./web-portal/admin
+      dockerfile: ../../Dockerfile.vue
+    container_name: tangtang-admin
+    ports:
+      - "8084:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_API_BASE_URL=http://localhost:8080/api
+    restart: unless-stopped
+    networks:
+      - tangtang-network
+    depends_on:
+      - backend
+
+  # 后端服务 - Python Flask/FastAPI
+  backend:
+    build:
+      context: ./services/raspberry-pi
+      dockerfile: ../../Dockerfile.python
+    container_name: tangtang-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=sqlite:///data/health.db
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
+    volumes:
+      - ./data:/app/data
+      - ./config.yaml:/app/config.yaml:ro
+    restart: unless-stopped
+    networks:
+      - tangtang-network
+
+  # Redis 缓存（可选，用于会话和缓存）
+  redis:
+    image: redis:alpine
+    container_name: tangtang-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - tangtang-network
+
+networks:
+  tangtang-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  data:

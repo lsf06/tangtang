@@ -1,0 +1,59 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+docker-compose.override.yml
+
+# 开发文件
+*.md
+*.log
+.env
+.env.*
+*.env
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# 节点
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv
+ENV
+env
+.venv
+*.egg-info
+dist
+build
+
+# 测试
+tests
+coverage
+.pytest_cache
+
+# 文档
+docs
+docs/
+
+# Web
+web-portal/*/dist
+web-portal/*/node_modules
+
+# 其他
+.DS_Store
+Thumbs.db
