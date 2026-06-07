@@ -1,0 +1,98 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f services/raspberry-pi/requirements.txt ]; then
+          pip install -r services/raspberry-pi/requirements.txt
+        fi
+    
+    - name: Build frontend
+      run: |
+        # Build family portal
+        if [ -d web-portal/family ]; then
+          cd web-portal/family
+          npm install --legacy-peer-deps || npm install
+          npm run build
+          cd ../..
+        fi
+        
+        # Build dashboard
+        if [ -d web-portal/dashboard ]; then
+          cd web-portal/dashboard
+          npm install --legacy-peer-deps || npm install
+          npm run build
+          cd ../..
+        fi
+        
+        # Build admin
+        if [ -d web-portal/admin ]; then
+          cd web-portal/admin
+          npm install --legacy-peer-deps || npm install
+          npm run build
+          cd ../..
+        fi
+    
+    - name: Create release artifacts
+      run: |
+        mkdir -p release-artifacts
+        
+        # Package backend
+        if [ -d services ]; then
+          cp -r services release-artifacts/
+        fi
+        
+        # Package frontend
+        if [ -d web-portal ]; then
+          cp -r web-portal release-artifacts/
+        fi
+        
+        # Package config
+        if [ -f .env.example ]; then
+          cp .env.example release-artifacts/.env.example
+        fi
+        
+        # Package docker-compose
+        if [ -f docker-compose.yml ]; then
+          cp docker-compose.yml release-artifacts/
+        fi
+    
+    - name: Create release zip
+      run: |
+        cd release-artifacts
+        zip -r ../tangtang-${{ github.event.release.tag_name }}.zip .
+        cd ..
+    
+    - name: Generate checksums
+      run: |
+        sha256sum tangtang-${{ github.event.release.tag_name }}.zip > tangtang-${{ github.event.release.tag_name }}-SHA256SUMS
+    
+    - name: Upload release assets
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          tangtang-${{ github.event.release.tag_name }}.zip
+          tangtang-${{ github.event.release.tag_name }}-SHA256SUMS
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

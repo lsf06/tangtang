@@ -58,7 +58,6 @@ trufflehog git file://. --since-commit HEAD --branch main --full-history
 如果您发现安全漏洞，请通过以下方式报告：
 
 1. **GitHub Security Advisory**
-   - 使用仓库的 [Security Advisories](https://github.com/lsf06/tangtang/security/advisories) 功能
    - 选择 "Report a vulnerability"
 
 2. **私人 Issue**

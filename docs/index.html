@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdgeAI 健康监护 - 基于边缘 AI 的多模态居家健康监护系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --accent-color: #FF9800;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --text-color: #333;
+            --bg-color: #fff;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        nav {
+            background: var(--dark-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: var(--light-color);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 4rem 2rem;
+        }
+        
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            padding: 4rem 2rem;
+            background: var(--dark-color);
+            color: white;
+        }
+        
+        .tech-stack .section-title {
+            color: white;
+        }
+        
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tech-badge {
+            background: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* Demo Section */
+        .demo {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .demo-placeholder {
+            background: var(--light-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: 10px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-placeholder p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Get Started */
+        .get-started {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+        }
+        
+        .get-started h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .get-started p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .get-started .btn {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Badges */
+        .badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            background: var(--light-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="badges">
+            <span class="badge">EdgeAI</span>
+            <span class="badge">IoT</span>
+            <span class="badge">Healthcare</span>
+        </div>
+        <h1>🏥 EdgeAI 健康监护系统</h1>
+        <p class="subtitle">基于边缘 AI 的多模态居家健康监护与无创血糖概念演示系统</p>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#features">功能特性</a></li>
+            <li><a href="#how-it-works">工作原理</a></li>
+            <li><a href="#tech-stack">技术栈</a></li>
+            <li><a href="#demo">演示</a></li>
+            <li><a href="#get-started">快速开始</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>让健康监护更智能、更无痛、更贴心</h2>
+        <p>用多模态生理感知与边缘 AI 分析技术，为居家老年患者解决传统有创血糖监测疼痛、耗材成本高、操作繁琐、数据零散、远程监护缺失的痛点。</p>
+        <div>
+            <a href="#get-started" class="btn btn-primary">开始使用</a>
+            <a href="https://github.com/lsf06/project1" class="btn btn-secondary" target="_blank">查看源码</a>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">✨ 核心功能</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🩸</div>
+                <h3>无创血糖检测</h3>
+                <p>近红外光谱技术，无痛检测血糖水平，让手指从千疮百孔中解脱</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>多模态传感融合</h3>
+                <p>心率、血氧、体温、光学特征多维度数据采集与分析</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗣️</div>
+                <h3>语音交互播报</h3>
+                <p>智能语音播报健康状态，比老妈唠叨但比老妈准确</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>远程家属监护</h3>
+                <p>家属端实时查看数据，异常预警推送，双向视频通话</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>AI 健康分析</h3>
+                <p>健康基线学习、异常检测、趋势分析、智能评分</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3>智能告警系统</h3>
+                <p>分级告警、本地声光报警、远程推送通知</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <h2 class="section-title">🔧 工作原理</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>数据采集</h3>
+                <p>ESP32-S3-EYE 采集多模态生理数据</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>预处理</h3>
+                <p>滤波降噪、环境补偿、数据标准化</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>AI 分析</h3>
+                <p>边缘 AI 模型进行健康评估</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>结果输出</h3>
+                <p>语音播报、可视化展示、告警推送</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tech Stack -->
+    <section id="tech-stack" class="tech-stack">
+        <h2 class="section-title">🛠️ 技术栈</h2>
+        <div class="tech-grid">
+            <span class="tech-badge">ESP32-S3-EYE</span>
+            <span class="tech-badge">树莓派 5</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Vue 3</span>
+            <span class="tech-badge">Element Plus</span>
+            <span class="tech-badge">ECharts</span>
+            <span class="tech-badge">TensorFlow Lite</span>
+            <span class="tech-badge">Docker</span>
+        </div>
+    </section>
+    
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <h2 class="section-title">🎬 演示</h2>
+        <div class="demo-placeholder">
+            <h3>演示视频即将上线</h3>
+            <p>硬件组装完成后将上传实际演示视频</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">当前阶段为概念演示，使用 AI 生成概念图展示产品设计方案</p>
+        </div>
+    </section>
+    
+    <!-- Get Started -->
+    <section id="get-started" class="get-started">
+        <h2>🚀 快速开始</h2>
+        <p>5 分钟上手，开启智能健康监护之旅</p>
+        <a href="https://github.com/lsf06/project1#快速入门" class="btn" target="_blank">查看安装指南</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>📦 项目仓库：<a href="https://github.com/lsf06/project1" target="_blank">github.com/lsf06/project1</a></p>
+        <p>📄 开源协议：MIT</p>
+        <p style="margin-top: 1rem;">Made with ❤️ by lsf06 for EdgeAI Healthcare</p>
+    </footer>
+</body>
+</html>

@@ -1,4 +1,4 @@
-# 🎉 Tangtang v1.0.0 - 初始版本发布
+# 🎉 Project1 v0.1.0-alpha - 初始版本发布
 
 > "让手指休息，让数据说话"
 
@@ -8,19 +8,19 @@
 
 | 项目 | 详情 |
 |------|------|
-| **版本号** | v1.0.0 |
+| **版本号** | v0.1.0-alpha |
 | **发布日期** | 2026-06-07 |
 | **版本类型** | 概念演示 (Proof of Concept) |
 | **兼容性** | 全新发布 |
 
 ---
 
-## 🚀 什么是 Tangtang？
+## 🚀 什么是 Project1？
 
-Tangtang 是一个基于边缘 AI 的多模态居家健康监护系统，主打**无创血糖概念验证**。我们用多模态生理感知与边缘 AI 分析技术，为居家老年患者解决传统有创血糖监测的痛点：
+Project1（原 Tangtang）是一个基于边缘 AI 的多模态居家健康监护系统，主打**无创血糖概念验证**。我们用多模态生理感知与边缘 AI 分析技术，为居家老年患者解决传统有创血糖监测的痛点：
 
 - ❌ 传统血糖仪：扎手指、耗材贵、操作烦
-- ✅ Tangtang：无痛检测、零耗材、语音交互
+- ✅ Project1：无痛检测、零耗材、语音交互
 
 ---
 
@@ -57,9 +57,9 @@ Tangtang 是一个基于边缘 AI 的多模态居家健康监护系统，主打*
 
 | 文件名 | 说明 | 大小 |
 |--------|------|------|
-| `tangtang-backend-win64.exe` | Windows 64 位后端服务 | TBD |
-| `tangtang-backend-linux` | Linux/树莓派后端服务 | TBD |
-| `tangtang-web-portal-dist.zip` | Web 前端打包文件 | TBD |
+| `project1-backend-win64.exe` | Windows 64 位后端服务 | TBD |
+| `project1-backend-linux` | Linux/树莓派后端服务 | TBD |
+| `project1-web-portal-dist.zip` | Web 前端打包文件 | TBD |
 | `esp32-s3-firmware.bin` | ESP32-S3-EYE 固件 | TBD |
 | `config.example.yaml` | 配置文件模板 | TBD |
 | `API 文档.pdf` | API 使用文档 | TBD |
@@ -80,8 +80,8 @@ Tangtang 是一个基于边缘 AI 的多模态居家健康监护系统，主打*
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/lsf06/tangtang.git
-cd tangtang
+git clone https://github.com/lsf06/project1.git
+cd project1
 
 # 2. 创建虚拟环境
 python -m venv venv
@@ -131,18 +131,18 @@ docker-compose down
 
 ## 📚 文档链接
 
-- [完整 README](https://github.com/lsf06/tangtang/blob/main/README.md)
-- [更新日志](https://github.com/lsf06/tangtang/blob/main/CHANGELOG.md)
-- [API 文档](https://github.com/lsf06/tangtang/blob/main/docs/API.md)
-- [部署指南](https://github.com/lsf06/tangtang/blob/main/docs/DEPLOYMENT.md)
+- [完整 README](https://github.com/lsf06/project1/blob/main/README.md)
+- [更新日志](https://github.com/lsf06/project1/blob/main/CHANGELOG.md)
+- [API 文档](https://github.com/lsf06/project1/blob/main/docs/API.md)
+- [部署指南](https://github.com/lsf06/project1/blob/main/docs/DEPLOYMENT.md)
 
 ---
 
 ## 🔗 相关链接
 
-- 📖 [项目主页](https://github.com/lsf06/tangtang)
-- 🐛 [问题反馈](https://github.com/lsf06/tangtang/issues)
-- 💡 [功能建议](https://github.com/lsf06/tangtang/discussions)
+- 📖 [项目主页](https://github.com/lsf06/project1)
+- 🐛 [问题反馈](https://github.com/lsf06/project1/issues)
+- 💡 [功能建议](https://github.com/lsf06/project1/discussions)
 - 📧 联系方式：3606406829@qq.com
 
 ---
@@ -162,7 +162,7 @@ docker-compose down
 - 开源代码：GPL-3.0
 - 核心模型：商业授权
 
-详见 [LICENSE](https://github.com/lsf06/tangtang/blob/main/LICENSE)
+详见 [LICENSE](https://github.com/lsf06/project1/blob/main/LICENSE)
 
 ---
 

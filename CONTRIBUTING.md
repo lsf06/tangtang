@@ -6,7 +6,7 @@
 
 ### 报告问题 / Report Issues
 
-如果你发现了 bug 或有功能建议，请使用 [GitHub Issues](https://github.com/lsf06/tangtang/issues)。
+如果你发现了 bug 或有功能建议，请使用 [GitHub Issues](https://github.com/lsf06/project1/issues)。
 
 **报告 Bug 时请包含：**
 - 问题描述
@@ -26,8 +26,8 @@
 
 1. **Fork 本仓库**
    ```bash
-   git clone https://github.com/lsf06/tangtang.git
-   cd tangtang
+   git clone https://github.com/lsf06/project1.git
+   cd project1
    ```
 
 2. **创建特性分支**
