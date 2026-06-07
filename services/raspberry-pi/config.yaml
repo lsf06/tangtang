@@ -1,0 +1,61 @@
+# 边缘 AI 健康监护系统 - 配置文件
+
+# 服务器配置
+server:
+  host: "0.0.0.0"
+  port: 8080
+  debug: false
+
+# 数据库配置
+database:
+  type: "sqlite"
+  path: "data/health.db"
+  # PostgreSQL 配置（可选）
+  # url: "postgresql://user:password@localhost/health_db"
+
+# Redis 配置
+redis:
+  host: "redis"
+  port: 6379
+  db: 0
+  password: ""
+
+# ESP32 设备配置
+esp32:
+  enabled: true
+  serial_port: "/dev/ttyUSB0"
+  baud_rate: 115200
+  websocket_url: "ws://localhost:8081"
+  timeout: 30
+
+# 传感器配置
+sensors:
+  heart_rate:
+    enabled: true
+    threshold_low: 50
+    threshold_high: 120
+  temperature:
+    enabled: true
+    threshold_low: 35.0
+    threshold_high: 38.0
+  spo2:
+    enabled: true
+    threshold_low: 90
+    threshold_high: 100
+
+# 告警配置
+alerts:
+  enabled: true
+  notification_email: ""
+  notification_webhook: ""
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "logs/app.log"
+  rotation: "500 MB"
+
+# 安全配置
+security:
+  secret_key: "${SECRET_KEY:-your-secret-key-change-in-production}"
+  token_expiry: 3600  # 1 小时
